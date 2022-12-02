@@ -1,5 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
+import { use } from 'passport';
 import { AppService } from './app.service';
+import { CurrentUser } from './auth/decorators/current-user.decorator';
+import { User } from './user/entities/user.entity';
 
 @Controller()
 export class AppController {
@@ -10,9 +13,9 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('test')
-  GetOi(): string {
-    return 'oi';
+  @Get('me')
+  getMe(@CurrentUser() user: User) {
+    return user;
   }
 
 }
