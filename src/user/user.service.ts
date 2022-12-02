@@ -28,8 +28,10 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findByEmail(email: string) {
+    return this.prismaServ.user.findUnique({
+      where: { email }
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
